@@ -1,25 +1,27 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
+import './globals.css'
+import AuthContext from './context/AuthContext'
+import ActiveStatus from './components/ActiveStatus'
+import ToasterContext from './context/ToasterContext'
 
-
-export const metadata: Metadata = {
-  title: "Messenger",
-  description: "chatting app",
-};
+export const metadata = {
+  title: 'Messenger',
+  description: 'Messenger Clone',
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body>
+        <AuthContext>
+          <ToasterContext />
+          <ActiveStatus />
+          {children}
+        </AuthContext>
       </body>
     </html>
-  );
+  )
 }
