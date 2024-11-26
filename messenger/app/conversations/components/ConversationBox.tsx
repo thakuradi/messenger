@@ -31,7 +31,6 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
 
   const lastMessage = useMemo(() => {
     const messages = data.messages || [];
-
     return messages[messages.length - 1];
   }, [data.messages]);
 
@@ -65,6 +64,14 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
     return 'Started a conversation';
   }, [lastMessage]);
 
+  // Add a fallback name if otherUser or data.name is undefined
+  const conversationName = useMemo(() => {
+    if (data.isGroup) {
+      return data.name || 'Group Conversation';
+    }
+    return otherUser?.name || 'Unknown User';
+  }, [data.isGroup, data.name, otherUser]);
+
   return ( 
     <div
       onClick={handleClick}
@@ -93,7 +100,7 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
           <span className="absolute inset-0" aria-hidden="true" />
           <div className="flex justify-between items-center mb-1">
             <p className="text-md font-medium text-gray-900">
-              {data.name || otherUser.name}
+              {conversationName}
             </p>
             {lastMessage?.createdAt && (
               <p 
