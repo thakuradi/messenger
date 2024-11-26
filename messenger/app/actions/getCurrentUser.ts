@@ -20,7 +20,8 @@ const getCurrentUser = async () => {
     }
 
     return currentUser;
-  } catch (error: any) {
+  } catch (error: unknown) {
+    console.error('An error occurred:', error);
     return null;
   }
 };

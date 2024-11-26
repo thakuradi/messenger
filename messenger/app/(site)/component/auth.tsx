@@ -15,7 +15,8 @@ import AuthSocialButton from "./AuthSocialButton";
 
 type Variant = "LOGIN" | "REGISTER";
 
-type Props = {};
+type Props = object;
+
 
 function AuthForm({}: Props) {
   const session = useSession();

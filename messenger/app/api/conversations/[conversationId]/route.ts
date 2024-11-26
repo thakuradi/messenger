@@ -49,7 +49,8 @@ export async function DELETE(
     });
 
     return NextResponse.json(deletedConversation)
-  } catch (error) {
+  } catch (error:unknown) {
+    console.error('An error occurred:', error);
     return NextResponse.json(null);
   }
 }
